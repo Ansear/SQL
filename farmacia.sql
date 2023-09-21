@@ -144,3 +144,69 @@ ALTER TABLE movimientoInventario
 ADD idFormaPago int(11);
 ALTER TABLE movimientoInventario
 ADD FOREIGN KEY(idFormaPago) REFERENCES formaPago(id);
+
+-- DML
+
+INSERT --Crear nuevos registros
+INSERT INTO name_tabla(c1,c2,t1....) VALUES ();
+-- Datos de tipo VARCHAR se envian con ""
+-- Datos de tipo FECHA se envian con ""
+-- Datos de tipo NUMERICOS se envian con 1538
+INSERT INTO pais(nombre) VALUES ("Colombia");
+-- Insertar varios datos 
+INSERT INTO pais(nombre) VALUES ("Peru"),("Ecuador"),("Panama");
+
+DELETE --Borrar registro de la tabla
+DELETE FROM pais WHERE nombre = "SEBASTIAN";
+
+DELETE --Borrar todos los registros de la tabla
+DELETE FROM pais;
+
+UPDATE --Actualizar Registro en la tabla
+UPDATE pais
+SET nombre = "España"
+WHERE id = 1;
+
+-- DQL
+SELECT --Seleccionar Registros de la tabla
+SELECT id,nombre FROM pais;
+
+-- Convertir unico el campo nombre de la tabla
+ALTER TABLE pais
+ADD CONSTRAINT UC_nombreP UNIQUE (nombre);
+
+
+-- Convertir unico el campo nombre de la tabla
+ALTER TABLE departamento
+ADD CONSTRAINT UC_nombreD UNIQUE (nombre);
+
+-- Añadir departamentos a la tabla DEPARTAMENTO
+INSERT INTO departamento(nombre,idpaisFk) VALUES 
+("Amazonas",2),("Antioquia",2),("Arauca",2),("Atlantico",2),("Bogota",2),
+("Bolivar",2),("Boyaca",2),("Caldas",2),("Caqueta",2),("Casanare",2),
+("Cauca",2),("Cesar",2),("Cordoba",2),("Choco",2),("Cundinamarca",2),("Guainia",2),
+("Guaviare",2),("Huila",2),("La Guajira",2),("Magdalena",2),("Meta",2),
+("Nariño",2),("Norte de Santander",2),("Putumayo",2),("Quindio",2),("Risaralda",2),
+("Santander",2),("San Andres y Providencia",2),("Sucre",2),("Tolima",2),("Valle del Cauca",2),
+("Vaupes",2),("Vichada",2);
+
+-- Resetear auto_increment de la tabla
+ALTER TABLE tu_tabla_va_aqui AUTO_INCREMENT = 1;
+
+-- Insertar Datos en tabla ciudad
+INSERT INTO ciudad(nombre,iddepartamentoFk) VALUES 
+("Bucaramanga",27),("Giron",27),("Piedecuesta",27),
+("Medellin",2),("Itagui",2),("Envigado",2),
+("Barranquilla",4),("Soledad",4),("Malambo",4);
+
+-- Seleccionar elementos de diferentes tablas
+SELECT p.id,p.nombre AS nombrePais,d.nombre AS nombreDepartamento ,c.nombre AS nombreCiudad
+FROM pais p
+JOIN departamento d ON p.id = d.idpaisFk
+JOIN ciudad c ON d.id = c.iddepartamentoFk
+ORDER BY c.nombre DESC;
+-- CONDICION DE CONSULTA -> WHERE
+-- OPERADORES COMPARACION -> =,<,>,>=,<=,<>
+-- OPERADORES DE PATRON -> like '%xxx%' contenga esa palabra xxx ,'%xxx' contenga esa palabra xxx al final,'xxx%' contenga esa palabra xxx al principio
+-- OPERADORES LOGICOS -> AND, OR, NOT
+-- ORDER BY ASC , DESC Ordenar de forma ascendente y descendente
