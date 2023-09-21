@@ -86,7 +86,7 @@ CREATE TABLE ubicacionPersona(
     complemento VARCHAR(50),
     idCiudad int(11),
     idPersona VARCHAR(20),
-    CONSTRAINT Pk_ubicacionPersona PRIMARY KEY(id)
+    CONSTRAINT Pk_ubicacionPersona PRIMARY KEY(id),
     CONSTRAINT Fk_idpersona FOREIGN KEY(idPersona) REFERENCES persona(id),
     CONSTRAINT Fk_idciudad FOREIGN KEY(idCiudad) REFERENCES ciudad(id)
 );
@@ -137,8 +137,8 @@ CREATE TABLE detalleMovInventario(
     cantidad TINYINT,
     precio DOUBLE(11,2),
     CONSTRAINT Fk_idInventario FOREIGN KEY(idInventario) REFERENCES inventario(id),
-    CONSTRAINT Fk_idMovInv FOREIGN KEY(idMovInv) REFERENCES movimientoInventario(id)
-    CONSTRAINT Pk_idInventario PRIMARY KEY(idInventario, idMovInv),
+    CONSTRAINT Fk_idMovInv FOREIGN KEY(idMovInv) REFERENCES movimientoInventario(id),
+    CONSTRAINT Pk_idInventario PRIMARY KEY(idInventario, idMovInv)
 );
 ALTER TABLE movimientoInventario
 ADD idFormaPago int(11);
